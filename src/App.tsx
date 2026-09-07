@@ -29,7 +29,7 @@ export function App() {
         );
       case 'marketplace':
       default:
-        return <MarketplaceView />;
+        return <MarketplaceView isMobileDeviceMode={isMobileDeviceMode} />;
     }
   };
 
@@ -130,31 +130,31 @@ export function App() {
   // If mobile frame preview mode is active on large screens:
   if (isMobileDeviceMode) {
     return (
-      <div className="min-h-screen bg-neutral-900 flex flex-col items-center justify-center p-4 sm:p-6">
+      <div className="min-h-screen bg-neutral-950 flex flex-col items-center justify-center p-3 sm:p-6">
         {/* Device Frame Control Bar */}
-        <div className="mb-4 flex items-center justify-between max-w-sm w-full text-white text-xs px-2">
+        <div className="mb-3 flex items-center justify-between max-w-sm w-full text-white text-xs px-2">
           <div className="flex items-center gap-2">
             <Smartphone className="w-4 h-4 text-purple-400" />
-            <span className="font-semibold">Mobile App Preview Mode</span>
+            <span className="font-semibold">Mobile App Preview</span>
           </div>
           <button
             onClick={() => setIsMobileDeviceMode(false)}
-            className="px-3 py-1 bg-white/20 hover:bg-white/30 rounded-lg text-white font-medium transition"
+            className="px-3 py-1 bg-white/20 hover:bg-white/30 rounded-lg text-white font-medium transition cursor-pointer"
           >
             Switch to Full Responsive
           </button>
         </div>
 
         {/* Mobile Phone Mockup */}
-        <div className="w-full max-w-[420px] h-[850px] bg-black rounded-[48px] p-3.5 shadow-2xl ring-8 ring-neutral-800 relative overflow-hidden flex flex-col">
+        <div className="w-full max-w-[420px] h-[860px] bg-black rounded-[50px] p-3.5 shadow-2xl ring-4 ring-neutral-800 relative overflow-hidden flex flex-col">
           {/* Dynamic Island / Speaker Notch */}
-          <div className="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-6 bg-black rounded-full z-50 flex items-center justify-center">
+          <div className="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-6 bg-black rounded-full z-50 flex items-center justify-center pointer-events-none shadow-md">
             <div className="w-2.5 h-2.5 rounded-full bg-[#1e1e1e] mr-3" />
             <div className="w-3 h-3 rounded-full bg-[#101010]" />
           </div>
 
-          {/* Screen Content */}
-          <div className="w-full h-full bg-[#F9FAFB] rounded-[36px] overflow-y-auto no-scrollbar relative">
+          {/* Screen Content with top padding so dynamic island doesn't obscure content */}
+          <div className="w-full h-full bg-[#F9FAFB] rounded-[38px] overflow-y-auto no-scrollbar relative pt-7">
             {appContent}
           </div>
         </div>
@@ -163,6 +163,7 @@ export function App() {
   }
 
   return appContent;
+
 }
 
 export default App;

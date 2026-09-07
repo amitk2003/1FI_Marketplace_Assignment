@@ -12,7 +12,11 @@ import { OrderSuccessModal } from './OrderSuccessModal';
 import { PortfolioDetailModal } from './PortfolioDetailModal';
 import { ToastContainer, type ToastMessage } from '../common/Toast';
 
-export const MarketplaceView: React.FC = () => {
+interface MarketplaceViewProps {
+  isMobileDeviceMode?: boolean;
+}
+
+export const MarketplaceView: React.FC<MarketplaceViewProps> = ({ isMobileDeviceMode = false }) => {
   // Products state
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -144,9 +148,12 @@ export const MarketplaceView: React.FC = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
       {/* Portfolio Limit & LAMF Value Banner */}
-      <PortfolioLimitBanner onOpenPortfolioModal={() => setIsPortfolioOpen(true)} />
+      <PortfolioLimitBanner
+        onOpenPortfolioModal={() => setIsPortfolioOpen(true)}
+        isMobileDeviceMode={isMobileDeviceMode}
+      />
 
       {/* Filter and Search Bar */}
       <FiltersBar
@@ -154,6 +161,7 @@ export const MarketplaceView: React.FC = () => {
         onFilterChange={handleFilterChange}
         onResetFilters={handleResetFilters}
         totalResults={products.length}
+        isMobileDeviceMode={isMobileDeviceMode}
       />
 
       {/* Main Content Area */}
@@ -174,7 +182,7 @@ export const MarketplaceView: React.FC = () => {
 
       {/* Loading Skeletons */}
       {isLoading && !error && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+        <div className={isMobileDeviceMode ? "grid grid-cols-1 gap-4" : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"}>
           {Array.from({ length: 8 }).map((_, i) => (
             <SkeletonCard key={i} />
           ))}
@@ -183,7 +191,7 @@ export const MarketplaceView: React.FC = () => {
 
       {/* Empty State */}
       {!isLoading && !error && products.length === 0 && (
-        <div className="bg-white rounded-3xl border border-gray-200 p-12 text-center my-8 shadow-xs">
+        <div className="bg-white rounded-3xl border border-gray-200 p-8 sm:p-12 text-center my-6 sm:my-8 shadow-xs">
           <div className="w-16 h-16 bg-purple-50 rounded-2xl mx-auto flex items-center justify-center text-[#6C28D9] mb-4">
             <PackageSearch className="w-8 h-8" />
           </div>
@@ -204,7 +212,7 @@ export const MarketplaceView: React.FC = () => {
 
       {/* Products Grid */}
       {!isLoading && !error && products.length > 0 && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+        <div className={isMobileDeviceMode ? "grid grid-cols-1 gap-4" : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"}>
           {products.map((product) => (
             <ProductCard
               key={product.id}

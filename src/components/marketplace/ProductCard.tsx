@@ -119,14 +119,14 @@ export const ProductCard: React.FC<Props> = ({
         </div>
 
         {/* Pricing & EMI Highlight */}
-        <div className="mt-4 pt-3 border-t border-purple-50">
-          <div className="flex items-baseline justify-between mb-1.5">
-            <div>
-              <span className="text-base font-extrabold text-gray-900">
+        <div className="mt-3 pt-2.5 border-t border-purple-50">
+          <div className="flex items-baseline justify-between mb-1.5 flex-wrap gap-1">
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-base sm:text-lg font-extrabold text-gray-900">
                 ₹{product.basePrice.toLocaleString('en-IN')}
               </span>
               {product.mrp > product.basePrice && (
-                <span className="text-xs text-gray-400 line-through ml-2">
+                <span className="text-xs text-gray-400 line-through">
                   ₹{product.mrp.toLocaleString('en-IN')}
                 </span>
               )}
@@ -134,14 +134,14 @@ export const ProductCard: React.FC<Props> = ({
           </div>
 
           {/* 1Fi Signature 0% EMI banner */}
-          <div className="bg-[#EFDAFF]/60 border border-[#B3A3BF]/40 rounded-xl px-2.5 py-1.5 mb-3 flex items-center justify-between">
+          <div className="bg-[#EFDAFF]/60 border border-[#B3A3BF]/40 rounded-xl px-2.5 py-1.5 mb-2.5 flex items-center justify-between gap-1 flex-wrap">
             <div className="flex items-center gap-1.5">
-              <div className="w-2 h-2 rounded-full bg-[#6C28D9]" />
+              <div className="w-1.5 h-1.5 rounded-full bg-[#6C28D9] shrink-0" />
               <span className="text-[11px] font-semibold text-gray-800">
                 From <span className="font-extrabold text-[#6C28D9]">₹{minMonthlyEmi.toLocaleString('en-IN')}/mo</span>
               </span>
             </div>
-            <span className="text-[10px] font-bold text-[#6C28D9] bg-white px-1.5 py-0.5 rounded shadow-xs">
+            <span className="text-[9px] sm:text-[10px] font-bold text-[#6C28D9] bg-white px-1.5 py-0.5 rounded shadow-xs whitespace-nowrap">
               0% Interest
             </span>
           </div>
@@ -150,16 +150,16 @@ export const ProductCard: React.FC<Props> = ({
           <div className="grid grid-cols-2 gap-2">
             <button
               onClick={() => onSelectProduct(product)}
-              className="py-2 px-2 text-xs font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-xl transition text-center"
+              className="py-2 px-2 text-xs font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-xl transition text-center truncate"
             >
               Details
             </button>
             <button
               onClick={() => onQuickEmiPlan(product)}
-              className="btn-1fi-primary py-2 px-2 text-xs gap-1"
+              className="btn-1fi-primary py-2 px-2 text-xs gap-1 truncate text-white"
             >
-              <span>Select Plan</span>
-              <ArrowRight className="w-3 h-3" />
+              <span className="truncate">Select Plan</span>
+              <ArrowRight className="w-3 h-3 shrink-0" />
             </button>
           </div>
         </div>

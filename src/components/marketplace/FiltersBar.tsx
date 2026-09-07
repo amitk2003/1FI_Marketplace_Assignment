@@ -8,6 +8,7 @@ interface Props {
   onFilterChange: (newFilters: Partial<FilterState>) => void;
   onResetFilters: () => void;
   totalResults: number;
+  isMobileDeviceMode?: boolean;
 }
 
 export const FiltersBar: React.FC<Props> = ({
@@ -15,6 +16,7 @@ export const FiltersBar: React.FC<Props> = ({
   onFilterChange,
   onResetFilters,
   totalResults,
+  isMobileDeviceMode = false,
 }) => {
   const getCategoryIcon = (id: CategoryId) => {
     switch (id) {
@@ -52,9 +54,9 @@ export const FiltersBar: React.FC<Props> = ({
   };
 
   return (
-    <div className="space-y-4 mb-6">
+    <div className="space-y-3 sm:space-y-4 mb-6">
       {/* Top row: Search Bar & Sort Dropdown */}
-      <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
+      <div className={isMobileDeviceMode ? "flex flex-col gap-2.5 items-stretch" : "flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between"}>
         {/* Search Bar */}
         <div className="relative flex-1">
           <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
